@@ -12,29 +12,28 @@ void strcopy(char* dest, char* src) {
 
 int strlength(char* str) {
 	int len = 0;
-
+	//str의 길이 반환
 	return len;
-
 }
 
 void append(char* str) {
-
+	//str 문자열을 맨 마지막에 추가
 }
 
 void insert(int line, char* str) {
-
+	//str 문자열을 line번째 줄에 삽입
 }
 
 void erase(int line) {
-
+	//line번째 문자열 삭제
 }
 
 char* linestring(int line) {
-
+	//line번째 줄 문자열 포인터 반환
 	int idx = 0;
 	document[idx] = new char[1024];
 	for (int i = 0; i < 1023; ++i) {
-		document[idx][i] = 'A';
+		document[idx][i] = 'A';  // to be deleted...
 	}
 
 	return document[idx];
