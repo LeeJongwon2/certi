@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <string.h>
+
+extern void append(char* str);
+extern void insert(int line, char* str);
+extern void erase(int line);
+extern char* linestring(int line);
+
+static inline unsigned short randnum() {
+static unsigned long long seed = 5;
+    return ((unsigned short)((seed = seed * 25214903914ULL + 11ULL) >> 16));
+}
+
+char* randstr() {
+    char str[1024];
+    for (int i = 0; i < 1024; ++i) {
+        str[i] = 'A' + randnum() % 26;
+    }
+    return str;
+}
+
+int main() {
+    int MAX = 100000;
+    int size = 0;
+    int SCORE = 0;
+    int time = 0;
+    // time start
+
+    for (int i = 0; i < 1000; ++i) {
+        char* str = randstr();
+        append(str);
+        size++;
+    }
+
+    while (size < MAX) {
+        int rnum = randnum() % 100;
+        if (rnum % 10) {
+            char* str = randstr();
+            append(str);
+            size++;
+        }
+
+        if (rnum % 2) {
+            int rline = randnum() % size;
+            char* str = randstr();
+            insert(rline, str);
+            size++;
+        }
+
+        else {
+            int rline = randnum() % size;
+            erase(rline);
+            size--;
+        }
+    }
+
+    char tmp_answer[1024];
+    char *user_answer;
+    for (int i = 0; i < 1024; ++i) {
+        tmp_answer[i] = 'A';
+    }
+
+    user_answer = linestring(500);
+    if (strcmp(user_answer, tmp_answer) != 0) {
+        SCORE += 10000000;
+    }
+
+    // time end
+    SCORE += time;
+ 
+    printf("SCORE:%d\n", SCORE);
+ 
+    return 0;
+}
